@@ -17,8 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textAppearance="?android:textAppearanceMedium" />
-
+        android:textColor="@color/colorDefaultText" />
     <ProgressBar
         android:id="@+id/circular_loading_indicator"
         android:layout_width="wrap_content"

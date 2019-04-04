@@ -8,7 +8,7 @@
     <!-- news_story_activity empty states -->
     <string name="no_title_found">Title N/A</string>
     <string name="no_column_section_found">Column N/A</string>
-    <string name="no_time_found">Time N/A</string>
+    <string name="no_time_found"> </string>
     <string name="no_date_found">Date N/A</string>
     <string name="no_author_found">Author N/A</string>
 

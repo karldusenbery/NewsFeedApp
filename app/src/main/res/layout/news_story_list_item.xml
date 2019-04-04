@@ -25,8 +25,7 @@
         android:layout_toRightOf="@id/thumbnailImage"
         android:textColor="@color/colorDefaultText"
         android:textSize="@dimen/title_text_size"
-        tools:text="@string/title_default_text"
-         />
+        tools:text="@string/title_default_text" />
 
     <TextView
         android:id="@+id/column_section"
@@ -51,8 +50,7 @@
         android:layout_marginLeft="@dimen/time_text_view_margin_start"
         android:textColor="@color/colorDateTime"
         android:textSize="@dimen/date_time_text_size"
-        tools:text="@string/time_default_text"
-         />
+        tools:text="@string/time_default_text" />
 
     <TextView
         android:id="@+id/date"
