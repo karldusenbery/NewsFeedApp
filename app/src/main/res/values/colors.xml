@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#2C6B95</color>
+    <color name="colorPrimaryDark">#442520</color>
+    <color name="colorAccent">#802B2C</color>
+
+    <!-- Default app background color. -->
+    <color name="colorAppBackground">#212121</color>
+
+    <!-- Progress bar color. -->
+    <color name="colorProgressBar">#FF4081</color>
+
+    <!-- Default text color. -->
+    <color name="colorDefaultText">#FFFFFF</color>
+
+    <!-- Column section colors. -->
+    <color name="colorCulture">#FC260A</color>
+    <color name="colorPolitics">#FF4C02</color>
+    <color name="colorReligion">#F7E900</color>
+    <color name="colorWorld">#93DD02</color>
+    <color name="colorHealthcare">#35CDD0</color>
+    <color name="colorWomansStudies">#5B118C</color>
+
+    <!-- Date, Time, and Author section colors. -->
+    <color name="colorDateTime">#BFA3A3</color>
+    <color name="colorAuthor">#1DA0C3</color>
+
 </resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/relative_layout_padding"
+    android:background="@color/colorAppBackground">
+
+    <ImageView
+        android:id="@+id/thumbnailImage"
+        android:layout_width="@dimen/thumbnail_image_width"
+        android:layout_height="@dimen/thumbnail_image_height"
+        android:layout_marginEnd="@dimen/thumbnail_image_margin_end"
+        android:layout_marginRight="@dimen/thumbnail_image_margin_end"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/newspaper"
+         />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/thumbnailImage"
+        android:layout_toRightOf="@id/thumbnailImage"
+        android:textColor="@color/colorDefaultText"
+        android:textSize="@dimen/title_text_size"
+        tools:text="@string/title_default_text"
+         />
+
+    <TextView
+        android:id="@+id/column_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/thumbnailImage"
+        android:layout_toRightOf="@id/thumbnailImage"
+        android:layout_below="@id/title"
+        android:textColor="@color/colorCulture"
+        android:textSize="@dimen/column_section_text_size"
+        tools:text="@string/column_section_default_text"
+         />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/title"
+        android:layout_marginStart="@dimen/time_text_view_margin_start"
+        android:layout_marginLeft="@dimen/time_text_view_margin_start"
+        android:textColor="@color/colorDateTime"
+        android:textSize="@dimen/date_time_text_size"
+        tools:text="@string/time_default_text"
+         />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/time"
+        android:layout_toLeftOf="@id/time"
+        android:layout_below="@id/title"
+        android:textColor="@color/colorDateTime"
+        android:textSize="@dimen/date_time_text_size"
+        tools:text="@string/date_default_text" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/colorAuthor"
+        android:textSize="@dimen/author_text_size"
+        tools:text="@string/author_default_text" />
+
+</RelativeLayout>

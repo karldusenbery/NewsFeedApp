@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">NewsFeed</string>
+    <string name="app_name">Your News</string>
+
+    <!-- main_activity default/empty states -->
+    <string name="no_news_found">No News Found</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+
+    <!-- news_story_activity empty states -->
+    <string name="no_title_found">Title N/A</string>
+    <string name="no_column_section_found">Column N/A</string>
+    <string name="no_time_found">Time N/A</string>
+    <string name="no_date_found">Date N/A</string>
+    <string name="no_author_found">Author N/A</string>
+
+    <!-- news_story_activity default placeholder text -->
+    <string name="title_default_text">Florida Man Goes On a Rampage - Steals All The Chicken</string>
+    <string name="column_section_default_text">Culture</string>
+    <string name="time_default_text">1:18 PM</string>
+    <string name="date_default_text">Nov 23, 1987</string>
+    <string name="author_default_text">John Karl Dusenbery</string>
+
 </resources>

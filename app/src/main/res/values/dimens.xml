@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--main_activity.xml dimensions-->
+    <dimen name="divider_height">2dp</dimen>
+
+    <!--news_story_list_item.xml dimensions-->
+    <dimen name="relative_layout_padding">8dp</dimen>
+    <dimen name="thumbnail_image_width">120dp</dimen>
+    <dimen name="thumbnail_image_height">100dp</dimen>
+    <dimen name="thumbnail_image_margin_end">8dp</dimen>
+    <dimen name="time_text_view_margin_start">8dp</dimen>
+
+    <!--news_story_list_item.xml text sizes-->
+    <dimen name="title_text_size">16sp</dimen>
+    <dimen name="column_section_text_size">14sp</dimen>
+    <dimen name="date_time_text_size">12sp</dimen>
+    <dimen name="author_text_size">10sp</dimen>
+
+</resources>
