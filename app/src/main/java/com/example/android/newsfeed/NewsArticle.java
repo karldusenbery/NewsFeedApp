@@ -1,12 +1,16 @@
 package com.example.android.newsfeed;
 
+import java.util.ArrayList;
+
 class NewsArticle {
     private String thumbnailImage;
     private String title;
     private String columnSection;
     private String date;
     private String time;
+    private String dateAndTime;
     private String author;
+    private ArrayList<String> authors;
     private String webpageUrl;
 
     //default constructor
@@ -18,6 +22,17 @@ class NewsArticle {
         this.time = time;
         this.author = author;
         this.webpageUrl = webpageUrl;
+    }
+
+    //constructor used in QueryUtils class
+    NewsArticle(String title, String section, String publicationDateTime, String webUrl, String thumbnail,  ArrayList<String> authors){
+        this.thumbnailImage = thumbnail;
+        this.title = title;
+        this.columnSection = section;
+        this.dateAndTime = date;
+        this.time = publicationDateTime;
+        this.authors = authors;
+        this.webpageUrl = webUrl;
     }
 
 
@@ -46,7 +61,15 @@ class NewsArticle {
         return author;
     }
 
+    ArrayList<String> getAuthors() {
+        return authors;
+    }
+
     String getWebpageUrl() {
         return webpageUrl;
+    }
+
+    String getWebPublicationDateAndTime() {
+        return dateAndTime;
     }
 }

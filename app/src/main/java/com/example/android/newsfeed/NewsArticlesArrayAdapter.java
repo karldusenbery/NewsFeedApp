@@ -1,18 +1,29 @@
 package com.example.android.newsfeed;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
 
+    /** Tag for log messages **/
+    private static final String LOG_TAG = NewsArticlesArrayAdapter.class.getName();
     private Context context;
 
     NewsArticlesArrayAdapter(@NonNull Context context, @NonNull List<NewsArticle> objects) {
@@ -28,54 +39,93 @@ public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.news_story_list_item, parent, false);
         }
-        NewsArticle currentNewsArticle = getItem(position);
-        if (currentNewsArticle != null) {
+        NewsArticle currentNews = getItem(position);
+        if (currentNews != null) {
+            ImageView contentImage = listItemView.findViewById(R.id.thumbnailImage);
+            loadImageFromUrl(currentNews.getThumbnailImage(), contentImage);
 
-            //Thumbnail image code **/
-            ImageView newsArticleMainImage = listItemView.findViewById(R.id.thumbnailImage);
-            newsArticleMainImage.setImageResource(R.drawable.newspaper);
-
-            //News article strings text code **/
-            TextView articleTitleTextView = listItemView.findViewById(R.id.title);
-            String title = currentNewsArticle.getTitle();
+            TextView contentTitle = listItemView.findViewById(R.id.title);
+            String title = currentNews.getTitle();
             if(title != null) {
-                articleTitleTextView.setText(title);
+                contentTitle.setText(title);
             }else{
-                articleTitleTextView.setText(context.getString(R.string.no_title_found));
+                contentTitle.setText(context.getString(R.string.no_title_found));
             }
 
-            TextView columnSectionTextView = listItemView.findViewById(R.id.column_section);
-            String columnSection = currentNewsArticle.getColumnSection();
-            if(columnSection != null) {
-                columnSectionTextView.setText(columnSection);
+            TextView contentSection = listItemView.findViewById(R.id.column_section);
+            String section = currentNews.getColumnSection();
+            if(section != null) {
+                contentSection.setText(section);
             }else{
-                columnSectionTextView.setText(context.getString(R.string.no_column_section_found));
+                contentSection.setText(context.getString(R.string.no_column_section_found));
             }
 
-            TextView dateTextView = listItemView.findViewById(R.id.date);
-            String articleDate = currentNewsArticle.getDate();
-            if(articleDate != null) {
-                dateTextView.setText(articleDate);
+            TextView contentPublishedDate = listItemView.findViewById(R.id.date);
+            TextView contentPublishedTime = listItemView.findViewById(R.id.time);
+            String currentDateAndTime = currentNews.getWebPublicationDateAndTime();
+            if(currentDateAndTime != null) {
+                try {
+                    String date = getNewsPublicationDate(currentDateAndTime);
+                    String time = getNewsPublicationTime(currentDateAndTime);
+                    contentPublishedDate.setText(date);
+                    contentPublishedTime.setText(time);
+                    contentPublishedDate.setVisibility(View.VISIBLE);
+                    contentPublishedTime.setVisibility(View.VISIBLE);
+                } catch (ParseException e) {
+                    Log.e(LOG_TAG, context.getString(R.string.problem_passing_date_and_time), e);
+                }
             }else{
-                dateTextView.setText(context.getString(R.string.no_date_found));
+                contentPublishedDate.setText(context.getString(R.string.no_date_found));
+                contentPublishedTime.setText(context.getString(R.string.no_time_found));
             }
 
-            TextView timeTextView = listItemView.findViewById(R.id.time);
-            String articleTime = currentNewsArticle.getTime();
-            if(articleTime != null) {
-                timeTextView.setText(articleTime);
+            TextView authorsTextView = listItemView.findViewById(R.id.author);
+            ArrayList<String> authorsArray = currentNews.getAuthors();
+            if(authorsArray == null ){
+                authorsTextView.setText(context.getString(R.string.no_author_found));
             }else{
-                timeTextView.setText(context.getString(R.string.no_time_found));
-            }
-
-            TextView authorTextView = listItemView.findViewById(R.id.author);
-            String articleAuthor = currentNewsArticle.getAuthor();
-            if(articleAuthor != null ){
-                authorTextView.setText(articleAuthor);
-            }else{
-                authorTextView.setText(context.getString(R.string.no_author_found));
+                StringBuilder authorString = new StringBuilder();
+                for(int i=0;i<authorsArray.size(); i++){
+                    authorString.append(authorsArray.get(i));
+                    if((i + 1) < authorsArray.size()){
+                        authorString.append(", ");
+                    }
+                }
+                authorsTextView.setText(authorString.toString());
+                authorsTextView.setVisibility(View.VISIBLE);
             }
         }
         return listItemView;
+    }
+
+    private String getNewsPublicationDate(String currentDateAndTime) throws ParseException {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(context.getString(R.string.received_date_and_time_format));
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfDate = new SimpleDateFormat(context.getString(R.string.displayed_date_format));
+        return sdfDate.format(sdf.parse(currentDateAndTime));
+    }
+
+    private String getNewsPublicationTime(String currentDateAndTime) throws ParseException {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(context.getString(R.string.received_date_and_time_format));
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat(context.getString(R.string.displayed_time_format));
+        sdfTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return sdfTime.format(sdf.parse(currentDateAndTime));
+    }
+
+    private void loadImageFromUrl(String url, ImageView newsArticleMainImage) {
+        if(url != null) {
+            Picasso.with(context).load(url).placeholder(R.drawable.newspaper)
+                    .error(R.drawable.newspaper)
+                    .into(newsArticleMainImage, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                        }
+
+                        @Override
+                        public void onError() {
+                        }
+                    });
+        }else{
+            newsArticleMainImage.setImageResource(R.drawable.newspaper);
+        }
     }
 }
