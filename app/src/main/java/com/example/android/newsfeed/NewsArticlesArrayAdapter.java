@@ -117,7 +117,7 @@ public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
 
     private void loadImageFromUrl(String url, ImageView newsArticleMainImage) {
         if(url != null) {
-            Picasso.with(context).load(url).placeholder(R.drawable.newspaper)
+            Picasso.with(context).load(url).placeholder(R.drawable.loading)
                     .error(R.drawable.newspaper)
                     .into(newsArticleMainImage, new com.squareup.picasso.Callback() {
                         @Override

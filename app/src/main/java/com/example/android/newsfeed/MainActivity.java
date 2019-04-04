@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
 
 
     private static final int NEWS_LOADER_ID = 1;
-    private static final String THE_GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search?section=games&show-tags=contributor&format=json&lang=en&order-by=newest&show-fields=thumbnail&page-size=50&api-key=feb4c2e1-b21f-4f7e-9dec-da3714289022";
-    private static final String THE_GUARDIAN_MAIN_URL = "https://www.theguardian.com/";
+    private static final String THE_GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search?edition=us&show-tags=contributor&format=json&lang=en&order-by=newest&show-fields=thumbnail&page-size=50&api-key=feb4c2e1-b21f-4f7e-9dec-da3714289022";
+    private static final String THE_GUARDIAN_MAIN_URL = "https://www.theguardian.com/us";
 
     private TextView emptyStateTextView;
     private View circularLoadingIndicator;
