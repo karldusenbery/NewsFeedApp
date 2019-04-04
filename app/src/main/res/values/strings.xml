@@ -47,5 +47,6 @@
     <string name="error_response_code_message">Error response code:</string>
     <string name="problem_parsing_news_json_result">Problem parsing the news JSON results</string>
     <string name="problem_passing_date_and_time">Problem in parsing Date or Time</string>
+    <string name="null_date_and_time">currentDateAndTime is null</string>
 
 </resources>

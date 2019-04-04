@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
+import static android.content.ContentValues.TAG;
+
 public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
 
     /** Tag for log messages **/
@@ -39,13 +41,13 @@ public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.news_story_list_item, parent, false);
         }
-        NewsArticle currentNews = getItem(position);
-        if (currentNews != null) {
+        NewsArticle currentNewsArticle = getItem(position);
+        if (currentNewsArticle != null) {
             ImageView contentImage = listItemView.findViewById(R.id.thumbnailImage);
-            loadImageFromUrl(currentNews.getThumbnailImage(), contentImage);
+            loadImageFromUrl(currentNewsArticle.getThumbnailImage(), contentImage);
 
             TextView contentTitle = listItemView.findViewById(R.id.title);
-            String title = currentNews.getTitle();
+            String title = currentNewsArticle.getTitle();
             if(title != null) {
                 contentTitle.setText(title);
             }else{
@@ -53,7 +55,7 @@ public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
             }
 
             TextView contentSection = listItemView.findViewById(R.id.column_section);
-            String section = currentNews.getColumnSection();
+            String section = currentNewsArticle.getColumnSection();
             if(section != null) {
                 contentSection.setText(section);
             }else{
@@ -62,7 +64,8 @@ public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
 
             TextView contentPublishedDate = listItemView.findViewById(R.id.date);
             TextView contentPublishedTime = listItemView.findViewById(R.id.time);
-            String currentDateAndTime = currentNews.getWebPublicationDateAndTime();
+            String currentDateAndTime = currentNewsArticle.getWebPublicationDateAndTime();
+            Log.i(TAG, ("Value of currentDateAndTime: " + currentDateAndTime));
             if(currentDateAndTime != null) {
                 try {
                     String date = getNewsPublicationDate(currentDateAndTime);
@@ -75,12 +78,13 @@ public class NewsArticlesArrayAdapter extends ArrayAdapter<NewsArticle> {
                     Log.e(LOG_TAG, context.getString(R.string.problem_passing_date_and_time), e);
                 }
             }else{
+                Log.e(TAG,context.getString(R.string.null_date_and_time));
                 contentPublishedDate.setText(context.getString(R.string.no_date_found));
                 contentPublishedTime.setText(context.getString(R.string.no_time_found));
             }
 
             TextView authorsTextView = listItemView.findViewById(R.id.author);
-            ArrayList<String> authorsArray = currentNews.getAuthors();
+            ArrayList<String> authorsArray = currentNewsArticle.getAuthors();
             if(authorsArray == null ){
                 authorsTextView.setText(context.getString(R.string.no_author_found));
             }else{

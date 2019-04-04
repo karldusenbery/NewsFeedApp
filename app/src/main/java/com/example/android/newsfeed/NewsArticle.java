@@ -1,6 +1,10 @@
 package com.example.android.newsfeed;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 class NewsArticle {
     private String thumbnailImage;
@@ -29,8 +33,8 @@ class NewsArticle {
         this.thumbnailImage = thumbnail;
         this.title = title;
         this.columnSection = section;
-        this.dateAndTime = date;
-        this.time = publicationDateTime;
+        this.dateAndTime = publicationDateTime;
+        Log.i(TAG, ("Value of publicationDateTime: " + publicationDateTime));
         this.authors = authors;
         this.webpageUrl = webUrl;
     }
@@ -70,6 +74,7 @@ class NewsArticle {
     }
 
     String getWebPublicationDateAndTime() {
+        Log.i(TAG, ("Value of dateAndTime: " + dateAndTime));
         return dateAndTime;
     }
 }
